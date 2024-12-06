@@ -71,9 +71,9 @@ fn main() {
         if topo
             .iter()
             .zip(update.iter())
-            .filter(|(t, u)| t == u)
-            .count()
-            == update.len()
+            .filter(|(t, u)| t != u)
+            .next()
+            .is_none()
         {
             let middle = update.len() / 2;
             middle_sum += update.get(middle).unwrap();
