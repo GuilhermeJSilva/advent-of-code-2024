@@ -66,7 +66,7 @@ fn explore_from_zero() -> BTreeSet<usize> {
     explored_values
 }
 
-#[warn(dead_code)]
+#[allow(dead_code)]
 fn first_try_count_after_steps(start_value: usize, steps: usize) -> usize {
     let mut current_values: Vec<(usize, usize)> = Vec::new();
     current_values.push((start_value, 0));

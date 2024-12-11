@@ -1,5 +1,5 @@
 use anyhow::Result;
-use core::panic;
+
 use std::io::{stdin, BufRead};
 
 const ZERO: u8 = '0' as u8;
