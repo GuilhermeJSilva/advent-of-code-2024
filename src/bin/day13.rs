@@ -22,11 +22,11 @@ impl ClawMachine {
         Ok(claw_machine)
     }
     fn parse_coordinate(line: &str) -> anyhow::Result<(i64, i64)> {
-        if let Some((_discard, rest)) = line.split_once("X") {
-            if let Some((x, rest)) = rest.split_once(",") {
-                let x = x.strip_prefix("=").unwrap_or(x).parse::<i64>()?;
-                if let Some((_discard, y)) = rest.split_once("Y") {
-                    let y = y.strip_prefix("=").unwrap_or(y).parse::<i64>()?;
+        if let Some((_discard, rest)) = line.split_once('X') {
+            if let Some((x, rest)) = rest.split_once(',') {
+                let x = x.strip_prefix('=').unwrap_or(x).parse::<i64>()?;
+                if let Some((_discard, y)) = rest.split_once('Y') {
+                    let y = y.strip_prefix('=').unwrap_or(y).parse::<i64>()?;
                     Ok((x, y))
                 } else {
                     Err(anyhow!("The X coordinate must finish with ',': {}", line))
@@ -84,8 +84,8 @@ impl ClawMachine {
 
     fn change_target(&self, change: i64) -> Self {
         Self {
-            a_button: self.a_button.clone(),
-            b_button: self.b_button.clone(),
+            a_button: self.a_button,
+            b_button: self.b_button,
             target_position: (
                 self.target_position.0 + change,
                 self.target_position.1 + change,

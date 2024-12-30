@@ -24,7 +24,7 @@ impl FromStr for Equation {
 
             return Ok(Equation { target, operands });
         }
-        return Err(anyhow!("failed to split on :"));
+        Err(anyhow!("failed to split on :"))
     }
 }
 
@@ -75,7 +75,7 @@ fn main() -> Result<()> {
         .lock()
         .lines()
         .map(|line| {
-            line.with_context(|| format!("failed to get line from stdin"))
+            line.with_context(|| "failed to get line from stdin".to_string())
                 .and_then(|line| Equation::from_str(&line))
         })
         .collect::<Result<Vec<Equation>>>()?;

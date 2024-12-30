@@ -3,7 +3,7 @@ use std::io::{stdin, BufRead};
 fn safe_level(level: &[i64]) -> bool {
     let diff = level.windows(2usize).all(|window| {
         let diff = (window[0] - window[1]).abs();
-        diff >= 1 && diff <= 3
+        (1..=3).contains(&diff)
     });
 
     let all_increase = level
@@ -46,6 +46,4 @@ fn main() {
         })
         .count();
     println!("{safe_levels_count}");
-
-    ()
 }

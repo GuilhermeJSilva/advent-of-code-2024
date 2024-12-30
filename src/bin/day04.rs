@@ -49,8 +49,7 @@ fn search_direction(
                 value,
             )
         })
-        .filter(|(row, col, value)| !matches_char(&lines, row, col, value))
-        .next()
+        .find(|(row, col, value)| !matches_char(lines, &row, &col, &value))
         .is_none()
 }
 
@@ -65,7 +64,7 @@ fn main() {
 
     let n_lines: i64 = lines.len().try_into().unwrap();
     let line_size: i64 = lines
-        .get(0)
+        .first()
         .expect("at least one line")
         .len()
         .try_into()
@@ -97,7 +96,7 @@ fn main() {
     let search_query = "MAS";
     let n_lines: i64 = lines.len().try_into().unwrap();
     let line_size: i64 = lines
-        .get(0)
+        .first()
         .expect("at least one line")
         .len()
         .try_into()

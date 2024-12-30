@@ -2,7 +2,7 @@ use std::{i64, io::stdin, usize};
 
 use anyhow::Result;
 
-const EMPTY_VALUE: u8 = '.' as u8;
+const EMPTY_VALUE: u8 = b'.';
 
 fn main() -> Result<()> {
     let values: Vec<Vec<u8>> = stdin()

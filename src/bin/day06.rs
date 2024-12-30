@@ -60,7 +60,7 @@ fn main() {
         .collect();
 
     let n_rows = map.len();
-    let n_cols = map.get(0).unwrap().len();
+    let n_cols = map.first().unwrap().len();
 
     let direction = 0;
     let (start_row, start_col): (usize, usize) = map

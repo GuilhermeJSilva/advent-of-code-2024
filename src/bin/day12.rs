@@ -188,14 +188,12 @@ impl Grouppings {
                     faces += 1;
                 }
             }
-        } else {
-            if let Some(prev_col) = col.checked_sub(1) {
-                if cell_value != map[row][prev_col] {
-                    faces += 1;
-                }
-            } else {
+        } else if let Some(prev_col) = col.checked_sub(1) {
+            if cell_value != map[row][prev_col] {
                 faces += 1;
             }
+        } else {
+            faces += 1;
         };
 
         // Left face
@@ -209,14 +207,12 @@ impl Grouppings {
                     faces += 1;
                 }
             }
-        } else {
-            if let Some(prev_row) = row.checked_sub(1) {
-                if cell_value != map[prev_row][col] {
-                    faces += 1;
-                }
-            } else {
+        } else if let Some(prev_row) = row.checked_sub(1) {
+            if cell_value != map[prev_row][col] {
                 faces += 1;
             }
+        } else {
+            faces += 1;
         };
 
         // Right face
@@ -232,14 +228,12 @@ impl Grouppings {
                     faces += 1;
                 }
             }
-        } else {
-            if let Some(prev_row) = row.checked_sub(1) {
-                if cell_value != map[prev_row][col] {
-                    faces += 1;
-                }
-            } else {
+        } else if let Some(prev_row) = row.checked_sub(1) {
+            if cell_value != map[prev_row][col] {
                 faces += 1;
             }
+        } else {
+            faces += 1;
         }
 
         // Bottom face
@@ -255,14 +249,12 @@ impl Grouppings {
                     faces += 1;
                 }
             }
-        } else {
-            if let Some(prev_col) = col.checked_sub(1) {
-                if cell_value != map[row][prev_col] {
-                    faces += 1;
-                }
-            } else {
+        } else if let Some(prev_col) = col.checked_sub(1) {
+            if cell_value != map[row][prev_col] {
                 faces += 1;
             }
+        } else {
+            faces += 1;
         };
 
         faces

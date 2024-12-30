@@ -28,10 +28,10 @@ fn main() {
 
     let mut right_count: HashMap<i64, i64> = HashMap::new();
     for right in right_list {
-        if right_count.contains_key(&right) {
-            *right_count.get_mut(&right).unwrap() += 1;
+        if let std::collections::hash_map::Entry::Vacant(e) = right_count.entry(right) {
+            e.insert(1);
         } else {
-            right_count.insert(right, 1);
+            *right_count.get_mut(&right).unwrap() += 1;
         }
     }
     let similarity: i64 = left_list
@@ -39,5 +39,4 @@ fn main() {
         .map(|left| right_count.get(left).copied().unwrap_or(0) * left)
         .sum();
     println!("{similarity}");
-    ()
 }

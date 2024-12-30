@@ -2,7 +2,7 @@ use anyhow::Result;
 
 use std::io::{stdin, BufRead};
 
-const ZERO: u8 = '0' as u8;
+const ZERO: u8 = b'0';
 
 #[derive(Copy, Clone, Debug)]
 struct File {
@@ -63,7 +63,7 @@ fn per_block_compaction(block_sizes: &Vec<usize>) -> usize {
         // compacted += &end_block_value.to_string();
     }
     // println!("{:?}", compacted);
-    return checksum;
+    checksum
 }
 
 fn block_checksum(blocks: &Vec<Block>) -> usize {
@@ -82,7 +82,7 @@ fn block_checksum(blocks: &Vec<Block>) -> usize {
         position += block.free;
     }
     // println!("{:?}", compacted);
-    return checksum;
+    checksum
 }
 
 fn main() -> Result<()> {
@@ -132,7 +132,7 @@ fn main() -> Result<()> {
             .occuppied
             .iter()
             .filter(|file| !file.moved)
-            .map(|file| *file)
+            .copied()
             .next()
         {
             for target_block in 0..idx_to_relocate {

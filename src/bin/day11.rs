@@ -33,11 +33,11 @@ impl Memoizer {
             let count = self.count_after_steps(value / mask, max_step - 1)
                 + self.count_after_steps(value % mask, max_step - 1);
             self.memory.insert(memory_key, count);
-            return count;
+            count
         } else {
             let count = self.count_after_steps(value * 2024, max_step - 1);
             self.memory.insert(memory_key, count);
-            return count;
+            count
         }
     }
 }

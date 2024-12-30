@@ -1,7 +1,7 @@
 use anyhow::Result;
 use std::io::{stdin, BufRead};
 
-const ZERO: u8 = '0' as u8;
+const ZERO: u8 = b'0';
 
 fn count_summits(
     height_map: &Vec<Vec<u8>>,
@@ -23,15 +23,15 @@ fn count_summits(
             count_summits(height_map, (position.0, new_col), summits)?;
         }
     }
-    if position.0 + 1 < height_map.len() {
-        if current_height + 1 == height_map[position.0 + 1][position.1] {
-            count_summits(height_map, (position.0 + 1, position.1), summits)?;
-        }
+    if position.0 + 1 < height_map.len()
+        && current_height + 1 == height_map[position.0 + 1][position.1]
+    {
+        count_summits(height_map, (position.0 + 1, position.1), summits)?;
     }
-    if position.1 + 1 < height_map[0].len() {
-        if current_height + 1 == height_map[position.0][position.1 + 1] {
-            count_summits(height_map, (position.0, position.1 + 1), summits)?;
-        }
+    if position.1 + 1 < height_map[0].len()
+        && current_height + 1 == height_map[position.0][position.1 + 1]
+    {
+        count_summits(height_map, (position.0, position.1 + 1), summits)?;
     }
 
     Ok(())

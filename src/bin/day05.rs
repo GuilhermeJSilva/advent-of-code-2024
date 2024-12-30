@@ -4,9 +4,9 @@ use std::{collections::HashMap, io::stdin};
 fn topo_order(rules: &Vec<(u64, u64)>) -> Vec<u64> {
     let mut adjacency_list: HashMap<u64, Vec<u64>> = HashMap::new();
     for (before, after) in rules {
-        let after_adj = adjacency_list.entry(*after).or_insert_with(|| Vec::new());
+        let after_adj = adjacency_list.entry(*after).or_default();
         after_adj.push(*before);
-        adjacency_list.entry(*before).or_insert_with(|| Vec::new());
+        adjacency_list.entry(*before).or_default();
     }
 
     let mut topo_order: Vec<u64> = Vec::new();
@@ -33,9 +33,9 @@ fn topo_order(rules: &Vec<(u64, u64)>) -> Vec<u64> {
             }
         }
 
-        topo_order.push(*without_before.get(0).unwrap());
+        topo_order.push(*without_before.first().unwrap());
     }
-    return topo_order;
+    topo_order
 }
 
 fn main() {
@@ -68,13 +68,7 @@ fn main() {
             .map(|(before, after)| (*before, *after))
             .collect();
         let topo = topo_order(&applicable_rules);
-        if topo
-            .iter()
-            .zip(update.iter())
-            .filter(|(t, u)| t != u)
-            .next()
-            .is_none()
-        {
+        if !topo.iter().zip(update.iter()).any(|(t, u)| t != u) {
             let middle = update.len() / 2;
             middle_sum += update.get(middle).unwrap();
         } else {
